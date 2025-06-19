@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mapa Satelital T4G</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Leaflet CSS-->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS, librería de mapas -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Obtener parámetros de la URL para latitud y longitud
+    // Si no están presentes, usar valores por defecto
+    const params = new URLSearchParams(window.location.search);
+    const lat = parseFloat(params.get("lat")) || -33.4489;
+    const lng = parseFloat(params.get("lng")) || -70.6693;
+
+    const map = L.map("map").setView([lat, lng], 13);
+    // Capa de mapa satelital, busca con coordenadas z,x,y
+    L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+      maxZoom: 17,
+      attribution: "© OpenTopoMap contributors"
+    }).addTo(map);
+
+    L.marker([lat, lng]).addTo(map)
+      .bindPopup(`Ubicación: ${lat.toFixed(4)}, ${lng.toFixed(4)}`)
+      .openPopup();
+  </script>
+</body>
+</html>

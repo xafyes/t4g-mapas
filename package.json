@@ -1,0 +1,12 @@
+{
+  "name": "t4g-mapas",
+  "version": "1.0.0",
+  "description": "Visor dinámico de mapas por coordenadas - T4G",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
